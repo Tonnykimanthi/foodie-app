@@ -18,7 +18,7 @@ const Navbar = () => {
         </Link>
         <ul
           className={`flex items-center gap-20 max-md:gap-10 text-xl max-sm:absolute max-sm:left-0 max-sm:right-0 max-sm:flex-col max-sm:top-16 max-sm:bg-white max-sm:py-10 max-sm:z-20 transition origin-top-right ${
-            navIsOpen ? "" : "scale-0"
+            navIsOpen ? "" : "max-sm:scale-0"
           }`}
         >
           <li
