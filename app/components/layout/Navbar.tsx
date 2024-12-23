@@ -25,10 +25,10 @@ const Navbar = () => {
           </li>
           <li
             className={`hover:text-orange-500 transition ${
-              pathname === "/about" ? "text-orange-500" : ""
+              pathname === "/recipes" ? "text-orange-500" : ""
             }`}
           >
-            <Link href="/about">About</Link>
+            <Link href="/recipes">Recipes</Link>
           </li>
           <li
             className={`hover:text-orange-500 transition ${
