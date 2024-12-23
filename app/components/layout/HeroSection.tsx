@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const HeroSection = () => {
   return (
     <main className="flex items-center justify-between gap-5 max-md:relative h-screen">
@@ -11,6 +13,11 @@ const HeroSection = () => {
           the incredible world of international cuisine, one delicious dish at a
           time.
         </p>
+        <Link href="/recipes" className="mt-5 inline-block">
+          <button className="bg-orange-500 hover:bg-orange-600 transition py-2 px-10 active:scale-95 rounded-full text-white">
+            Explore
+          </button>
+        </Link>
       </div>
 
       <div className="size-96 max-md:absolute max-md:left-1/2 max-md:-translate-x-1/2 -z-10 rounded-full max-md:mx-auto max-md:w-[50em] max-md:h-[50em] overflow-hidden flex-shrink-0 max-lg:size-80">
