@@ -1,7 +1,9 @@
 "use client";
 
-import Loader from "../components/ui/Loader";
 import useFetch from "../hooks/useFetch";
+// Components
+import Error from "../components/ui/Error";
+import Loader from "../components/ui/Loader";
 
 type Category = {
   idCategory: string;
@@ -28,11 +30,7 @@ const Categories = () => {
           <Loader />
         </div>
       )}
-      {!loading && error && (
-        <p className="mt-10 text-center text-xl text-red-500">
-          Oops! Something went wrong.
-        </p>
-      )}
+      {!loading && error && <Error />}
       <div className="grid w-full grid-cols-3 gap-5 py-5 max-sm:grid-cols-2 max-[360px]:grid-cols-1">
         {!loading &&
           !error &&
