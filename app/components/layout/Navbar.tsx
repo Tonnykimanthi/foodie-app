@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 // Icons
 import { IoMenuOutline } from "react-icons/io5";
-import { IoMdClose } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [navIsOpen, setnavIsOpen] = useState(false);
@@ -16,7 +16,7 @@ const Navbar = () => {
     <header className="bg-white">
       <nav className="flex items-center justify-between p-5">
         <Link href="/">
-          <div className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-3xl font-bold text-transparent">
+          <div className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-3xl max-sm:text-2xl font-bold text-transparent">
             Foodie App
           </div>
         </Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
             <Link href="/favourites">Favourites</Link>
           </li>
         </ul>
-        <div className="sm:hidden">
+        <div className="grid place-items-center sm:hidden">
           <button
             className={`${navIsOpen ? "hidden" : ""}`}
             onClick={() => setnavIsOpen(true)}
@@ -58,7 +58,7 @@ const Navbar = () => {
             className={`${navIsOpen ? "" : "hidden"}`}
             onClick={() => setnavIsOpen(false)}
           >
-            <IoMdClose className="size-8" />
+            <IoCloseOutline className="size-8" />
           </button>
         </div>
       </nav>
