@@ -44,7 +44,7 @@ const Categories = () => {
               <img
                 src={category.strCategoryThumb}
                 alt="The meal"
-                className="object-cover transition duration-300 group-hover:scale-105"
+                className="mx-auto object-cover transition duration-300 group-hover:scale-105"
               />
               <div className="p-2 text-center">
                 <span>{category.strCategory}</span>
