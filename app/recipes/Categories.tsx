@@ -19,7 +19,7 @@ const Categories = () => {
   return (
     <>
       {loading && (
-        <div className="grid w-full grid-cols-3 gap-5 py-5">
+        <div className="grid w-full grid-cols-3 gap-5 py-5 max-sm:grid-cols-2 max-[360px]:grid-cols-1">
           <Loader />
           <Loader />
           <Loader />
@@ -33,7 +33,7 @@ const Categories = () => {
           Oops! Something went wrong.
         </p>
       )}
-      <div className="grid w-full grid-cols-3 gap-5 py-5">
+      <div className="grid w-full grid-cols-3 gap-5 py-5 max-sm:grid-cols-2 max-[360px]:grid-cols-1">
         {!loading &&
           !error &&
           data?.categories?.map((category: Category) => (
