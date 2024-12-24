@@ -1,8 +1,12 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+
+// Icons
+import { IoMenuOutline } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const [navIsOpen, setnavIsOpen] = useState(false);
@@ -10,33 +14,33 @@ const Navbar = () => {
 
   return (
     <header className="bg-white">
-      <nav className="p-5 flex justify-between items-center">
+      <nav className="flex items-center justify-between p-5">
         <Link href="/">
-          <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 text-transparent bg-clip-text">
+          <div className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-3xl font-bold text-transparent">
             Foodie App
           </div>
         </Link>
         <ul
-          className={`flex items-center gap-20 max-md:gap-10 text-xl max-sm:absolute max-sm:left-0 max-sm:right-0 max-sm:flex-col max-sm:top-16 max-sm:bg-white max-sm:py-10 max-sm:z-20 transition origin-top-right ${
+          className={`flex origin-top-right items-center gap-20 text-xl transition max-md:gap-10 max-sm:absolute max-sm:left-0 max-sm:right-0 max-sm:top-16 max-sm:z-20 max-sm:flex-col max-sm:bg-white max-sm:py-10 ${
             navIsOpen ? "" : "max-sm:scale-0"
           }`}
         >
           <li
-            className={`hover:text-orange-500 transition ${
+            className={`transition hover:text-orange-500 ${
               pathname === "/" ? "text-orange-500" : ""
             }`}
           >
             <Link href="/">Home</Link>
           </li>
           <li
-            className={`hover:text-orange-500 transition ${
+            className={`transition hover:text-orange-500 ${
               pathname === "/recipes" ? "text-orange-500" : ""
             }`}
           >
             <Link href="/recipes">Recipes</Link>
           </li>
           <li
-            className={`hover:text-orange-500 transition ${
+            className={`transition hover:text-orange-500 ${
               pathname === "/favourites" ? "text-orange-500" : ""
             }`}
           >
@@ -48,13 +52,13 @@ const Navbar = () => {
             className={`${navIsOpen ? "hidden" : ""}`}
             onClick={() => setnavIsOpen(true)}
           >
-            Open
+            <IoMenuOutline className="size-8" />
           </button>
           <button
             className={`${navIsOpen ? "" : "hidden"}`}
             onClick={() => setnavIsOpen(false)}
           >
-            Close
+            <IoMdClose className="size-8" />
           </button>
         </div>
       </nav>
