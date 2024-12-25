@@ -1,6 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import useFetch from "../hooks/useFetch";
+
 // Components
 import Error from "../components/ui/Error";
 import Loader from "../components/ui/Loader";
@@ -16,7 +18,11 @@ const Categories = () => {
     "https://www.themealdb.com/api/json/v1/1/categories.php",
   );
 
-  console.log(data);
+  const router = useRouter();
+
+  const handleRedirectCategories = (name: string) => {
+    router.push(`recipes/${name}`);
+  };
 
   return (
     <>
@@ -38,6 +44,7 @@ const Categories = () => {
             <div
               key={category.idCategory}
               className="group overflow-hidden rounded-lg shadow-md shadow-black/10"
+              onClick={() => handleRedirectCategories(category.strCategory)}
             >
               <img
                 src={category.strCategoryThumb}

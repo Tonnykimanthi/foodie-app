@@ -1,16 +1,22 @@
 // Icons
 import { CiHeart } from "react-icons/ci";
 
-const Category = () => {
+type Meal = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+};
+
+const Category = ({ strMeal, strMealThumb }: Meal) => {
   return (
-    <div className="relative max-h-60 overflow-hidden rounded-lg shadow-md shadow-black/10 group">
+    <div className="group relative max-h-60 overflow-hidden rounded-lg shadow-md shadow-black/10">
       <img
-        src="https://www.themealdb.com/images/media/meals/1529446352.jpg"
-        alt="Chicken Congee"
+        src={strMealThumb}
+        alt={strMeal}
         className="object-cover transition duration-300 group-hover:scale-105"
       />
-      <div className="absolute bottom-0 flex w-full items-center justify-between bg-white/30 p-3">
-        <p className="text-xl font-medium">Chicken Congee</p>
+      <div className="absolute bottom-0 flex w-full items-center justify-between bg-black/20 p-2">
+        <p className="text-lg font-medium text-white">{strMeal}</p>
         <button>
           <CiHeart className="size-8" />
         </button>
