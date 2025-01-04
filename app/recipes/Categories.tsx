@@ -43,7 +43,7 @@ const Categories = () => {
           data?.categories?.map((category: Category) => (
             <div
               key={category.idCategory}
-              className="group overflow-hidden rounded-lg shadow-md shadow-black/10"
+              className="group cursor-pointer overflow-hidden rounded-lg shadow-md shadow-black/10 transition duration-300 hover:shadow-lg"
               onClick={() => handleRedirectCategories(category.strCategory)}
             >
               <img
