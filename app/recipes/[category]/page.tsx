@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 // Hooks
 import useFetch from "@/app/hooks/useFetch";
 // Components
@@ -16,12 +16,16 @@ type Meal = {
 
 const page = () => {
   const params = useParams();
-  console.log(params);
+  const router = useRouter();
+  console.log("paarams:", params);
+  console.log("router:", router);
   const { data, loading, error } = useFetch<{ meals: Meal[] }>(
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${params.category}`,
   );
 
-  console.log(data);
+  const handleRedirectToSingleMeal = (mealName: string) => {
+    router.push(`${params.category}/${mealName}`);
+  };
 
   return (
     <main className="flex flex-col items-center px-5">
@@ -38,7 +42,17 @@ const page = () => {
             <Loader />
           </>
         )}
-        {data?.meals.map((meal) => <Category key={meal.idMeal} {...meal} />)}
+        {data?.meals?.map((meal) => (
+          <Category
+            key={meal.idMeal}
+            strMeal={meal.strMeal}
+            strMealThumb={meal.strMealThumb}
+            idMeal={meal.idMeal}
+            handleRedirectToSingleMeal={() =>
+              handleRedirectToSingleMeal(meal.strMeal)
+            }
+          />
+        ))}
       </div>
     </main>
   );

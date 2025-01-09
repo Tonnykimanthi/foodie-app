@@ -20,8 +20,8 @@ const Categories = () => {
 
   const router = useRouter();
 
-  const handleRedirectCategories = (name: string) => {
-    router.push(`recipes/${name}`);
+  const handleRedirectToCategory = (categoryName: string) => {
+    router.push(`recipes/${categoryName}`);
   };
 
   return (
@@ -44,7 +44,7 @@ const Categories = () => {
             <div
               key={category.idCategory}
               className="group cursor-pointer overflow-hidden rounded-lg shadow-md shadow-black/10 transition duration-300 hover:shadow-lg"
-              onClick={() => handleRedirectCategories(category.strCategory)}
+              onClick={() => handleRedirectToCategory(category.strCategory)}
             >
               <img
                 src={category.strCategoryThumb}
