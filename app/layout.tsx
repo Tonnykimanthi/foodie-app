@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+// Components
 import Navbar from "./components/layout/Navbar";
+// Context
+import { MealsContextProvider } from "../app/contexts/MealsContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,8 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden bg-gray-50 text-black antialiased`}
       >
-        <Navbar />
-        {children}
+        <MealsContextProvider>
+          <Navbar />
+          {children}
+        </MealsContextProvider>
       </body>
     </html>
   );

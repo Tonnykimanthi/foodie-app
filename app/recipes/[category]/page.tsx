@@ -19,6 +19,7 @@ const page = () => {
   const router = useRouter();
   console.log("paarams:", params);
   console.log("router:", router);
+
   const { data, loading, error } = useFetch<{ meals: Meal[] }>(
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${params.category}`,
   );

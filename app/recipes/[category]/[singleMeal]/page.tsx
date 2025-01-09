@@ -1,8 +1,36 @@
+"use client";
+
+import useFetch from "@/app/hooks/useFetch";
+import { useParams } from "next/navigation";
+
+type Meal = {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+};
 
 const page = () => {
-  return (
-    <div>Single Meal</div>
-  )
-}
+  const params = useParams();
+  const { data, loading, error } = useFetch<{ meals: Meal[] }>(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+`,
+  );
+  console.log(params);
 
-export default page
+  return (
+    <div className="flex flex-col items-center">
+      <h1 className="mt-5 text-2xl font-medium italic">
+        {data?.meals[0].strMeal}
+      </h1>
+      <div className="mt-5 h-96 w-11/12 max-w-4xl overflow-hidden rounded-md">
+        <img
+          src="https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
+          alt=""
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default page;
