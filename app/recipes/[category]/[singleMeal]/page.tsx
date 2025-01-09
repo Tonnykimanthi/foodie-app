@@ -29,6 +29,17 @@ const page = () => {
           className="h-full w-full object-cover"
         />
       </div>
+
+      <div>
+        <h2 className="font-bold">Ingredients</h2>
+        <p>penne rigate</p>
+        <p>olive oil</p>
+        <p>garlic</p>
+      </div>
+
+      <div>
+        <h2 className="font-bold">Insructions</h2>
+      </div>
     </div>
   );
 };
