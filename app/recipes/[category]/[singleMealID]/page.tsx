@@ -15,7 +15,7 @@ type Meal = {
   [key: string]: string;
 };
 
-const page = () => {
+const Page = () => {
   const params = useParams();
   const { data, loading, error } = useFetch<{ meals: Meal[] }>(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.singleMealID}
@@ -73,4 +73,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
