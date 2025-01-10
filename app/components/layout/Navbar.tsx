@@ -33,8 +33,7 @@ const Navbar = () => {
             <Link href="/">Home</Link>
           </li>
           <li
-            className={`transition hover:text-orange-500 ${
-              pathname === "/recipes" ? "text-orange-500" : ""
+            className={`transition hover:text-orange-500 ${pathname.startsWith("/recipes") ? "text-orange-500" : ""
             }`}
           >
             <Link href="/recipes">Recipes</Link>
