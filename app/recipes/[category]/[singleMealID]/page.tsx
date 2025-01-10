@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import useFetch from "@/app/hooks/useFetch";
 // Components
 import Error from "@/app/components/ui/Error";
+import LoaderSpinner from "@/app/components/ui/LoaderSpinner";
 
 type Meal = {
   idMeal: string;
@@ -37,7 +38,8 @@ const page = () => {
 
   return (
     <main className="px-5">
-      {loading && <div className="mt-5 text-center">Loading...</div>}
+      {loading && <LoaderSpinner />}
+
       {!loading && error && <Error />}
       {meal && (
         <div className="mt-5 flex flex-col items-center">
