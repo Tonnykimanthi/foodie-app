@@ -17,15 +17,13 @@ type Meal = {
 const page = () => {
   const params = useParams();
   const router = useRouter();
-  console.log("paarams:", params);
-  console.log("router:", router);
 
   const { data, loading, error } = useFetch<{ meals: Meal[] }>(
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${params.category}`,
   );
 
-  const handleRedirectToSingleMeal = (mealName: string) => {
-    router.push(`${params.category}/${mealName}`);
+  const handleRedirectToSingleMeal = (mealID: string) => {
+    router.push(`${params.category}/${mealID}`);
   };
 
   return (
@@ -50,7 +48,7 @@ const page = () => {
             strMealThumb={meal.strMealThumb}
             idMeal={meal.idMeal}
             handleRedirectToSingleMeal={() =>
-              handleRedirectToSingleMeal(meal.strMeal)
+              handleRedirectToSingleMeal(meal.idMeal)
             }
           />
         ))}

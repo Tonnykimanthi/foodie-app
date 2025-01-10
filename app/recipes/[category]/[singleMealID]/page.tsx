@@ -17,11 +17,10 @@ type Meal = {
 const page = () => {
   const params = useParams();
   const { data, loading, error } = useFetch<{ meals: Meal[] }>(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.singleMealID}
 `,
   );
   const meal = data?.meals[0];
-  console.log("meal:", meal);
 
   const ingredients: string[] = [];
 
@@ -35,19 +34,18 @@ const page = () => {
       }
     }
   }
-  console.log("Ingredients:", ingredients);
 
   return (
     <main className="px-5">
-      {loading && <span>Loading...</span>}
+      {loading && <div className="mt-5 text-center">Loading...</div>}
       {!loading && error && <Error />}
-      {!loading && meal && (
-        <div className="flex flex-col items-center">
-          <h1 className="mt-5 text-2xl font-medium">{meal.strMeal}</h1>
+      {meal && (
+        <div className="mt-5 flex flex-col items-center">
+          <h1 className="text-2xl font-medium">{meal.strMeal}</h1>
           <div className="max-w-4x mt-5 aspect-video w-11/12 overflow-hidden rounded-md">
             <img
-              src="https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
-              alt=""
+              src={meal.strMealThumb}
+              alt={meal.strMeal}
               className="h-full w-full object-cover"
             />
           </div>
