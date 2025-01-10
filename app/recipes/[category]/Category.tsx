@@ -23,8 +23,8 @@ const Category = ({
         alt={strMeal}
         className="object- transition duration-300 group-hover:scale-105"
       />
-      <div className="absolute bottom-0 flex w-full items-center justify-between bg-black/20 p-2">
-        <p className="text-lg font-medium text-white">{strMeal}</p>
+      <div className="absolute bottom-0 flex w-full items-center justify-between gap-x-2 bg-black/20 p-2">
+        <p className="truncate text-lg font-medium text-white">{strMeal}</p>
         <button>
           <CiHeart className="size-8 text-white" />
         </button>
