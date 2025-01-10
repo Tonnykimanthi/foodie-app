@@ -1,4 +1,3 @@
-import Search from "../components/ui/Search";
 import Categories from "./Categories";
 
 const page = () => {
