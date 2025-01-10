@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useFetch = <T>(url: string) => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -16,8 +16,12 @@ const useFetch = <T>(url: string) => {
         if (resp.ok) {
           setData(json);
         }
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
