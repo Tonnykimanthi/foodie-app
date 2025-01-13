@@ -14,7 +14,7 @@ type Meal = {
   idMeal: string;
 };
 
-const Page = () => {
+const Pageclear = () => {
   const params = useParams();
   const router = useRouter();
 
@@ -57,4 +57,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Pageclear;
