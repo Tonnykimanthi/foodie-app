@@ -12,6 +12,11 @@ type Action =
 type FavouritesContextType = {
   state: FavouritesState;
   dispatch: React.Dispatch<Action>;
+  handleFavourite: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    idMeal: string,
+  ) => void;
+  isFavourite: (idFavourite: string) => boolean;
 };
 
 export const mealsContext = createContext<FavouritesContextType | null>(null);
@@ -47,14 +52,33 @@ export const MealsContextProvider = ({
   const [state, dispatch] = useReducer(favouritesReducer, {
     favourites: storedFavourites,
   });
-  console.log("StoreFavourites:", state);
 
   useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(state.favourites));
   }, [state.favourites]);
 
+  // TOGGLE MEAL TO FAVOURITES
+  const handleFavourite = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    idMeal: string,
+  ) => {
+    e.stopPropagation();
+    if (state.favourites.includes(idMeal)) {
+      dispatch({ type: "REMOVE_FAVOURITE", payload: idMeal });
+    } else {
+      dispatch({ type: "ADD_FAVOURITE", payload: idMeal });
+    }
+  };
+
+  const isFavourite = (idFavourite: string) =>
+    state.favourites.includes(idFavourite);
+
+  console.log(state);
+
   return (
-    <mealsContext.Provider value={{ state, dispatch }}>
+    <mealsContext.Provider
+      value={{ state, dispatch, handleFavourite, isFavourite }}
+    >
       {children}
     </mealsContext.Provider>
   );

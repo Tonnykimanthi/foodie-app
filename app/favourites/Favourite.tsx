@@ -1,29 +1,20 @@
 // Hooks
-import { useMealsContext } from "@/app/hooks/useMealsContext";
+import { useMealsContext } from "../hooks/useMealsContext";
 // Icons
 import { HiOutlineHeart } from "react-icons/hi2";
 import { HiHeart } from "react-icons/hi2";
 
 type Meal = {
+  idMeal: string;
   strMeal: string;
   strMealThumb: string;
-  idMeal: string;
-  handleRedirectToSingleMeal: () => void;
 };
 
-const Category = ({
-  idMeal,
-  strMeal,
-  strMealThumb,
-  handleRedirectToSingleMeal,
-}: Meal) => {
-  const { state, dispatch, handleFavourite, isFavourite } = useMealsContext();
+const Favourite = ({ idMeal, strMeal, strMealThumb }: Meal) => {
+  const { handleFavourite, isFavourite } = useMealsContext();
 
   return (
-    <div
-      className="group relative max-h-60 cursor-pointer overflow-hidden rounded-lg shadow-md shadow-black/10"
-      onClick={handleRedirectToSingleMeal}
-    >
+    <main className="group relative max-h-60 cursor-pointer overflow-hidden rounded-lg shadow-md shadow-black/10">
       <img
         src={strMealThumb}
         alt={strMeal}
@@ -39,8 +30,8 @@ const Category = ({
           )}
         </button>
       </div>
-    </div>
+    </main>
   );
 };
 
-export default Category;
+export default Favourite;
