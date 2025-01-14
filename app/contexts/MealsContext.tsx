@@ -1,23 +1,60 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
-type MealsContextType = {
-  activeMeal: string;
-  setActiveMeal: Dispatch<SetStateAction<string>>;
+type FavouritesState = {
+  favourites: string[];
+};
+type Action =
+  | { type: "ADD_FAVOURITE"; payload: string }
+  | { type: "REMOVE_FAVOURITE"; payload: string };
+
+type FavouritesContextType = {
+  state: FavouritesState;
+  dispatch: React.Dispatch<Action>;
 };
 
-export const mealsContext = createContext<MealsContextType | null>(null);
+export const mealsContext = createContext<FavouritesContextType | null>(null);
+
+const favouritesReducer = (state: FavouritesState, action: Action) => {
+  switch (action.type) {
+    case "ADD_FAVOURITE":
+      if (state.favourites.includes(action.payload)) {
+        return state;
+      }
+      return { ...state, favourites: [...state.favourites, action.payload] };
+    case "REMOVE_FAVOURITE":
+      return {
+        ...state,
+        favourites: state.favourites.filter(
+          (idMeal) => idMeal !== action.payload,
+        ),
+      };
+
+    default:
+      return state;
+  }
+};
 
 export const MealsContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [activeMeal, setActiveMeal] = useState("");
+  const storedFavourites = JSON.parse(
+    localStorage.getItem("favourites") || "[]",
+  );
+  const [state, dispatch] = useReducer(favouritesReducer, {
+    favourites: storedFavourites,
+  });
+  console.log("StoreFavourites:", state);
+
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(state.favourites));
+  }, [state.favourites]);
 
   return (
-    <mealsContext.Provider value={{ activeMeal, setActiveMeal }}>
+    <mealsContext.Provider value={{ state, dispatch }}>
       {children}
     </mealsContext.Provider>
   );
