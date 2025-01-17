@@ -9,9 +9,10 @@ type Meal = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
+  strCategory: string;
 };
 
-const Favourite = ({ idMeal, strMeal, strMealThumb }: Meal) => {
+const Favourite = ({ idMeal, strMeal, strMealThumb, strCategory }: Meal) => {
   const params = useParams();
   const router = useRouter();
 
@@ -20,7 +21,7 @@ const Favourite = ({ idMeal, strMeal, strMealThumb }: Meal) => {
   console.log("Params:", params);
 
   const handleRedirectToSingleMeal = (mealID: string) => {
-    router.replace(`recipes/${mealID}`);
+    router.replace(`${strCategory}/${mealID}`);
   };
 
   return (
