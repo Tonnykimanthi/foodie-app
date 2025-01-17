@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 // Hooks
-import useFetch from "../hooks/useFetch";
-import { useMealsContext } from "../hooks/useMealsContext";
+import useFetch from "../../hooks/useFetch";
+import { useMealsContext } from "../../hooks/useMealsContext";
 // Components
-import Favourite from "./Favourite";
-import Loader from "../components/ui/Loader";
-import Error from "../components/ui/Error";
+import Favourite from "./Favourites";
+import Loader from "../../components/ui/Loader";
+import Error from "../../components/ui/Error";
 
 type Meal = {
   idMeal: string;
@@ -16,14 +16,14 @@ type Meal = {
 };
 
 const page = () => {
-  const { state, dispatch } = useMealsContext();
+  const { state } = useMealsContext();
 
   const meals = [];
   let favLoading = false;
   let favError = null;
 
   for (let id of state.favourites) {
-    const { data, loading, error } = useFetch<{ meals: Meal }>(
+    const { data, loading, error } = useFetch<{ meals: Meal[] }>(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
     );
 

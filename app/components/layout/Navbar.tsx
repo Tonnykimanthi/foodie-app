@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 // Icons
 import { IoMenuOutline } from "react-icons/io5";
@@ -11,12 +11,17 @@ import { IoCloseOutline } from "react-icons/io5";
 const Navbar = () => {
   const [navIsOpen, setnavIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleRouteToFavourites = () => {
+    router.push("/recipes/favourites");
+  };
 
   return (
     <header className="bg-white">
       <nav className="flex items-center justify-between p-5">
         <Link href="/">
-          <div className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-3xl max-sm:text-2xl font-bold text-transparent">
+          <div className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-3xl font-bold text-transparent max-sm:text-2xl">
             Foodie App
           </div>
         </Link>
@@ -33,17 +38,23 @@ const Navbar = () => {
             <Link href="/">Home</Link>
           </li>
           <li
-            className={`transition hover:text-orange-500 ${pathname.startsWith("/recipes") ? "text-orange-500" : ""
+            className={`transition hover:text-orange-500 ${
+              pathname === "/recipes/favourites"
+                ? ""
+                : pathname.startsWith("/recipes")
+                  ? "text-orange-500"
+                  : ""
             }`}
           >
             <Link href="/recipes">Recipes</Link>
           </li>
           <li
             className={`transition hover:text-orange-500 ${
-              pathname === "/favourites" ? "text-orange-500" : ""
+              pathname === "/recipes/favourites" ? "text-orange-500" : ""
             }`}
+            onClick={handleRouteToFavourites}
           >
-            <Link href="/favourites">Favourites</Link>
+            <Link href="recipes/favourites">Favourites</Link>
           </li>
         </ul>
         <div className="grid place-items-center sm:hidden">

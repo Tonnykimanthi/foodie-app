@@ -1,5 +1,6 @@
+import { useParams, useRouter } from "next/navigation";
 // Hooks
-import { useMealsContext } from "../hooks/useMealsContext";
+import { useMealsContext } from "../../hooks/useMealsContext";
 // Icons
 import { HiOutlineHeart } from "react-icons/hi2";
 import { HiHeart } from "react-icons/hi2";
@@ -11,14 +12,26 @@ type Meal = {
 };
 
 const Favourite = ({ idMeal, strMeal, strMealThumb }: Meal) => {
+  const params = useParams();
+  const router = useRouter();
+
   const { handleFavourite, isFavourite } = useMealsContext();
 
+  console.log("Params:", params);
+
+  const handleRedirectToSingleMeal = (mealID: string) => {
+    router.replace(`recipes/${mealID}`);
+  };
+
   return (
-    <main className="group relative max-h-60 cursor-pointer overflow-hidden rounded-lg shadow-md shadow-black/10">
+    <div
+      className="group relative max-h-60 cursor-pointer overflow-hidden rounded-lg shadow-md shadow-black/10"
+      onClick={() => handleRedirectToSingleMeal(idMeal)}
+    >
       <img
         src={strMealThumb}
         alt={strMeal}
-        className="object- transition duration-300 group-hover:scale-105"
+        className="transition duration-300 group-hover:scale-105"
       />
       <div className="absolute bottom-0 flex w-full items-center justify-between gap-x-2 bg-black/20 p-2">
         <p className="truncate text-lg font-medium text-white">{strMeal}</p>
@@ -30,7 +43,7 @@ const Favourite = ({ idMeal, strMeal, strMealThumb }: Meal) => {
           )}
         </button>
       </div>
-    </main>
+    </div>
   );
 };
 
