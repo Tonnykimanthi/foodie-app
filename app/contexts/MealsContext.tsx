@@ -73,8 +73,6 @@ export const MealsContextProvider = ({
   const isFavourite = (idFavourite: string) =>
     state.favourites.includes(idFavourite);
 
-  console.log(state);
-
   return (
     <mealsContext.Provider
       value={{ state, dispatch, handleFavourite, isFavourite }}
