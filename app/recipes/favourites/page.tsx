@@ -5,7 +5,7 @@ import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useMealsContext } from "../../hooks/useMealsContext";
 // Components
-import Favourite from "./Favourites";
+import Favourite from "./Favourite";
 import Loader from "../../components/ui/Loader";
 import Error from "../../components/ui/Error";
 
@@ -53,11 +53,17 @@ const page = () => {
           </>
         )}
       </div>
-      <div className="grid w-full grid-cols-3 gap-5 py-5 max-sm:grid-cols-2 max-[360px]:grid-cols-1">
-        {meals.map((meal) => (
-          <Favourite key={meal.idMeal} {...meal} />
-        ))}
-      </div>
+      {meals.length === 0 ? (
+        <p className="text-center">
+          You have not added any meal to favourites.
+        </p>
+      ) : (
+        <div className="grid w-full grid-cols-3 gap-5 py-5 max-sm:grid-cols-2 max-[360px]:grid-cols-1">
+          {meals.map((meal) => (
+            <Favourite key={meal.idMeal} {...meal} />
+          ))}
+        </div>
+      )}
     </main>
   );
 };
