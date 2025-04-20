@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 type FavouritesState = {
   favourites: string[];
@@ -14,7 +14,7 @@ type FavouritesContextType = {
   dispatch: React.Dispatch<Action>;
   handleFavourite: (
     e: React.MouseEvent<HTMLButtonElement>,
-    idMeal: string,
+    idMeal: string
   ) => void;
   isFavourite: (idFavourite: string) => boolean;
 };
@@ -32,10 +32,9 @@ const favouritesReducer = (state: FavouritesState, action: Action) => {
       return {
         ...state,
         favourites: state.favourites.filter(
-          (idMeal) => idMeal !== action.payload,
+          (idMeal) => idMeal !== action.payload
         ),
       };
-
     default:
       return state;
   }
@@ -46,21 +45,35 @@ export const MealsContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const storedFavourites = JSON.parse(
-    localStorage.getItem("favourites") || "[]",
-  );
+  const [isClient, setIsClient] = useState(false);
   const [state, dispatch] = useReducer(favouritesReducer, {
-    favourites: storedFavourites,
+    favourites: [],
   });
 
+  // Load from localStorage only on the client
   useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(state.favourites));
+    if (typeof window !== "undefined") {
+      const storedFavourites = JSON.parse(
+        localStorage.getItem("favourites") || "[]"
+      );
+      dispatch({ type: "ADD_FAVOURITE", payload: "" }); // Dummy dispatch to trigger initial load
+      storedFavourites.forEach((id: string) => {
+        dispatch({ type: "ADD_FAVOURITE", payload: id });
+      });
+      setIsClient(true);
+    }
+  }, []);
+
+  // Sync localStorage when favourites change
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("favourites", JSON.stringify(state.favourites));
+    }
   }, [state.favourites]);
 
-  // TOGGLE MEAL TO FAVOURITES
   const handleFavourite = (
     e: React.MouseEvent<HTMLButtonElement>,
-    idMeal: string,
+    idMeal: string
   ) => {
     e.stopPropagation();
     if (state.favourites.includes(idMeal)) {
@@ -77,7 +90,7 @@ export const MealsContextProvider = ({
     <mealsContext.Provider
       value={{ state, dispatch, handleFavourite, isFavourite }}
     >
-      {children}
+      {isClient && children}
     </mealsContext.Provider>
   );
 };
