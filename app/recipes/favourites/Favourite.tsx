@@ -1,4 +1,4 @@
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 // Hooks
 import useFetch from "@/app/hooks/useFetch";
 import { useMealsContext } from "../../hooks/useMealsContext";

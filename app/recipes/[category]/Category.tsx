@@ -17,7 +17,7 @@ const Category = ({
   strMealThumb,
   handleRedirectToSingleMeal,
 }: Meal) => {
-  const { state, dispatch, handleFavourite, isFavourite } = useMealsContext();
+  const { handleFavourite, isFavourite } = useMealsContext();
 
   return (
     <div
