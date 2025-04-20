@@ -56,7 +56,6 @@ export const MealsContextProvider = ({
       const storedFavourites = JSON.parse(
         localStorage.getItem("favourites") || "[]"
       );
-      dispatch({ type: "ADD_FAVOURITE", payload: "" }); // Dummy dispatch to trigger initial load
       storedFavourites.forEach((id: string) => {
         dispatch({ type: "ADD_FAVOURITE", payload: id });
       });
