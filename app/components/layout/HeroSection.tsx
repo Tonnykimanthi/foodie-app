@@ -1,6 +1,7 @@
 "use client";
 
 import useFetch from "@/app/hooks/useFetch";
+import Image from "next/image";
 import Link from "next/link";
 
 type Meal = {
@@ -38,11 +39,13 @@ const HeroSection = () => {
         </Link>
       </div>
 
-      <div className="size-96 flex-shrink-0 overflow-hidden rounded-full shadow-[0_0_15px_2px_rgba(0,0,0,0.25)] shadow-black max-lg:size-80 max-md:absolute max-md:left-1/2 max-md:top-5 max-md:mx-auto max-md:h-[45em] max-md:w-[45em] max-md:-translate-x-1/2">
-        <img
-          className="h-full w-full object-cover"
+      <div className="relative size-96 flex-shrink-0 overflow-hidden rounded-full shadow-[0_0_15px_2px_rgba(0,0,0,0.25)] shadow-black max-lg:size-80 max-md:absolute max-md:left-1/2 max-md:top-5 max-md:mx-auto max-md:h-[45em] max-md:w-[45em] max-md:-translate-x-1/2">
+        <Image
+          className="object-cover"
           src={randomImage}
-          alt="Food"
+          layout="fill"
+          priority
+          alt=""
         />
         <div className="absolute inset-0 bg-black opacity-25 md:hidden"></div>
       </div>
