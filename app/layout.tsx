@@ -20,6 +20,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Foodie App",
   description: "Recipe Web App created by Tonny Kimanthi",
+  icons: {
+    icon: "/food.jfif",
+  },
 };
 
 export default function RootLayout({
