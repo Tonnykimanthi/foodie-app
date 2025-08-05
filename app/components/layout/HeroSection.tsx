@@ -44,6 +44,7 @@ const HeroSection = () => {
           src={randomImage}
           alt="Food"
         />
+        <div className="absolute inset-0 bg-black opacity-25 md:hidden"></div>
       </div>
     </main>
   );
